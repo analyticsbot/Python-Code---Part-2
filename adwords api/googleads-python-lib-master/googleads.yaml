@@ -1,0 +1,30 @@
+adwords:
+  developer_token: z8hS5P8Sa2rVIhjMLjfcng
+  client_id: 585883628562-aa30lslm9054ut09ke8guk5aum82ak89.apps.googleusercontent.com
+  client_secret: mUa3dIphJ5dOsvwRUkwD1-oj
+  refresh_token: 1/axfFNRzLfFmIOE-55tOftYB7WYVqISnlNRHtIGMB2lw
+# The following values are optional:
+#  client_customer_id: INSERT_CLIENT_CUSTOMER_ID_HERE
+#  partial_failure: True
+#  validate_only: True
+
+# dfp:
+#   application_name: INSERT_APPLICATION_NAME_HERE
+#   client_id: INSERT_OAUTH_2_CLIENT_ID_HERE
+#   client_secret: INSERT_CLIENT_SECRET_HERE
+#   refresh_token: INSERT_REFRESH_TOKEN_HERE
+# The following values are required for all services except NetworkService,
+# unless the network code is set directly on the DfpClient object:
+#  network_code: INSERT_NETWORK_CODE_HERE
+
+# The following values are optional:
+
+# The following are optional settings for using a proxy.
+# proxy_info:
+#  host: INSERT_HOST_HERE
+#  port: INSERT_PROXY_PORT_HERE
+# The following values are optional:
+#  disable_ssl_certificate_validation: False
+#  ca_certs: INSERT_PATH_HERE
+
+

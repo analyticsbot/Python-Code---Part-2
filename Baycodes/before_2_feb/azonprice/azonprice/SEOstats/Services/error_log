@@ -1,0 +1,7 @@
+[15-Oct-2014 06:59:23 America/Chicago] PHP Fatal error:  Class 'SEOstats\SEOstats' not found in /home4/baycodes/public_html/pr/md/amazonaffiliate/SEOstats/Services/Datacom.php on line 20
+[15-Oct-2014 06:59:23 America/Chicago] PHP Fatal error:  Class 'SEOstats\SEOstats' not found in /home4/baycodes/public_html/pr/md/amazonaffiliate/SEOstats/Services/Ebay.php on line 23
+[15-Oct-2014 06:59:24 America/Chicago] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [2003] Can't connect to MySQL server on 'haffoudhijobscom1.ipagemysql.com' (111)' in /home4/baycodes/public_html/pr/md/amazonaffiliate/SEOstats/Services/config.inc.php:10
+Stack trace:
+#0 /home4/baycodes/public_html/pr/md/amazonaffiliate/SEOstats/Services/config.inc.php(10): PDO->__construct('mysql:host=haff...', 'christian', '123')
+#1 {main}
+  thrown in /home4/baycodes/public_html/pr/md/amazonaffiliate/SEOstats/Services/config.inc.php on line 10

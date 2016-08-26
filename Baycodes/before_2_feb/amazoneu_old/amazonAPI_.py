@@ -1,0 +1,18 @@
+from amazon.api import AmazonAPI
+
+##Access Key ID:
+##AKIAIRGYI76BYPQZXAQQ
+##Secret Access Key:
+##L0/L/G8k0seIOvoFgisY7YmE9N4vjS4byDW6a0ag
+##Account Id:
+##273589934636 
+
+AMAZON_ACCESS_KEY='AKIAIRGYI76BYPQZXAQQ'
+AMAZON_SECRET_KEY ='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'
+AMAZON_ASSOC_TAG =273589934636
+
+amazon = AmazonAPI(AMAZON_ACCESS_KEY, AMAZON_SECRET_KEY, AMAZON_ASSOC_TAG)
+product = amazon.lookup(asin='B013GYAPYM')
+
+amazon_uk = AmazonAPI(AMAZON_ACCESS_KEY, AMAZON_SECRET_KEY, AMAZON_ASSOC_TAG, region="UK")
+product.price_and_currency

@@ -1,0 +1,4 @@
+[20-Aug-2014 08:59:01 America/Chicago] PHP Warning:  ZipArchive::open() [<a href='ziparchive.open'>ziparchive.open</a>]: Empty string as source in /home4/baycodes/public_html/pr/md/amazonaffiliate/unzip.php on line 5
+[15-Oct-2014 06:58:52 America/Chicago] PHP Warning:  ZipArchive::open(): Empty string as source in /home4/baycodes/public_html/pr/md/amazonaffiliate/unzip.php on line 5
+[01-Nov-2014 01:49:34 America/Chicago] PHP Warning:  stream_get_contents() expects parameter 1 to be resource, string given in /home4/baycodes/public_html/pr/md/azonprice/import.php on line 2
+[01-Nov-2014 02:12:39 America/Chicago] PHP Parse error:  syntax error, unexpected '}' in /home4/baycodes/public_html/pr/md/azonprice/import.php on line 6

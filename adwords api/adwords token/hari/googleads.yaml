@@ -1,0 +1,29 @@
+adwords:
+  developer_token: 'P65JANbYyDiAkMYProAn0A'
+  user_agent: 'aazzV3'
+  client_id: '535819312718-bvduhadaeouvk4sofkofe9ar1efvj1u5.apps.googleusercontent.com'
+  client_secret: 'EVX7Y-q2XPfT7MZlgsmDFWEI'
+  refresh_token: '1/Wciv0GWxrQMKqTkYo7KYTRPFcA5anqdMaAVCKWZ9VpdIgOrJDtdun6zK6XiATCKT'
+# The following values are optional:
+  client_customer_id: '543-557-1475'
+#  partial_failure: True
+#  validate_only: True
+#  https_proxy: INSERT_PROXY_URL_HERE:PORT
+
+#dfp:
+#  application_name: INSERT_APPLICATION_NAME_HERE
+ # client_id: INSERT_OAUTH_2_CLIENT_ID_HERE
+ # client_secret: INSERT_CLIENT_SECRET_HERE
+ # refresh_token: INSERT_REFRESH_TOKEN_HERE
+# The following values are optional:
+#  network_code: INSERT_NETWORK_CODE_HERE
+#  https_proxy: INSERT_PROXY_URL_HERE:PORT
+
+#dfa:
+ # username: INSERT_DFA_USERNAME_HERE
+ # application_name: INSERT_APPLICATION_NAME_HERE
+ # client_id: INSERT_OAUTH_2_CLIENT_ID_HERE
+ # client_secret: INSERT_CLIENT_SECRET_HERE
+ # refresh_token: INSERT_REFRESH_TOKEN_HERE
+# The following values are optional:
+#  https_proxy: INSERT_PROXY_URL_HERE:PORT

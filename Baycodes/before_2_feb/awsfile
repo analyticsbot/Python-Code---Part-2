@@ -1,0 +1,26 @@
+<VirtualHost *:80>
+         WSGIDaemonProcess app
+     WSGIScriptAlias / /var/www/amazoneu/app.wsgi
+
+     <Directory /var/www/amazoneu>
+            WSGIProcessGroup app
+        WSGIApplicationGroup %{GLOBAL}
+        Order deny,allow
+        Allow from all
+     </Directory>
+</VirtualHost>
+
+
+NameVirtualHost *:80
+
+<VirtualHost *:80>
+        ServerName ec2-52-8-35-135.us-west-1.compute.amazonaws.com
+        WSGIScriptAlias / /var/www/amazoneu/app.wsgi
+        <Directory /var/www/amazoneu/>
+                Order allow,deny
+                Allow from all
+        </Directory>
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        LogLevel info
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>

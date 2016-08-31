@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% if title %}
+    <title>{{title}}</title>
+    {% else %}
+    <title>Amazon Search</title>
+    {% endif %}
+<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+  <script src="../static/js/jquery.min.js"></script>
+  <script src="../static/js/bootstrap.min.js"></script>
+
+    <style>
+	
+	.topcorner{
+   position:absolute;
+   top:50;
+   right:30;
+   left:30;
+  }
+  
+    body {
+        background: #555 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB9JREFUeNpi/P//PwM6YGLAAuCCmpqacC2MRGsHCDAA+fIHfeQbO8kAAAAASUVORK5CYII=);
+        font: 13px 'Lucida sans', Arial, Helvetica;
+        color: #eee;
+        text-align: center;
+    }
+    
+    a {
+        color: #ccc;
+    }
+    
+    /*-------------------------------------*/
+    
+    .cf:before, .cf:after{
+      content:"";
+      display:table;
+    }
+    
+    .cf:after{
+      clear:both;
+    }
+
+    .cf{
+      zoom:1;
+    }
+
+    /*-------------------------------------*/   
+    
+    .form-wrapper {
+        width: 450px;
+        padding: 15px;
+        margin: 150px auto 50px auto;
+        background: #444;
+        background: rgba(0,0,0,.2);
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        -moz-box-shadow: 0 1px 1px rgba(0,0,0,.4) inset, 0 1px 0 rgba(255,255,255,.2);
+        -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.4) inset, 0 1px 0 rgba(255,255,255,.2);
+        box-shadow: 0 1px 1px rgba(0,0,0,.4) inset, 0 1px 0 rgba(255,255,255,.2);
+    }
+    
+    #searchterm {
+        width: 335px;
+        height: 40px;
+        padding: 10px 5px;
+        margin: 0px 8px;
+        float: left;    
+        font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+        border: 0;
+        background: #eee;
+        -moz-border-radius: 3px 0 0 3px;
+        -webkit-border-radius: 3px 0 0 3px;
+        border-radius: 3px 3px 3px 3px;      
+        color: #000000;
+    }
+    
+    #searchterm:focus {
+        outline: 0;
+        background: #fff;
+        -moz-box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
+        -webkit-box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
+        box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
+    }
+    
+    #searchterm::-webkit-input-placeholder {
+       color: #999;
+       font-weight: normal;
+       font-style: italic;
+    }
+    
+    #searchterm:-moz-placeholder {
+        color: #999;
+        font-weight: normal;
+        font-style: italic;
+    }
+    
+    #searchterm:-ms-input-placeholder {
+        color: #999;
+        font-weight: normal;
+        font-style: italic;
+    }    
+    
+    .form-wrapper button {
+        overflow: visible;
+        position: absolute;
+        margin: 0px -40px;
+        float: right;
+        border: 0;
+        padding: 0;
+        cursor: pointer;
+        height: 40px;
+        width: 85px;
+        font: bold 15px/40px 'lucida sans', 'trebuchet MS', 'Tahoma';
+        color: #fff;
+        text-transform: uppercase;
+        background: #d83c3c;
+        -moz-border-radius: 0 3px 3px 0;
+        -webkit-border-radius: 0 3px 3px 0;
+        border-radius: 0 3px 3px 0;      
+        text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);
+    }   
+      
+    .form-wrapper button:hover{     
+        background: #e54040;
+    }   
+      
+    .form-wrapper button:active,
+    .form-wrapper button:focus{   
+        background: #c42f2f;    
+    }
+    
+    .form-wrapper button:before {
+        content: '';
+        position: absolute;
+        border-width: 8px 8px 8px 0;
+        border-style: solid solid solid none;
+        border-color: transparent #d83c3c transparent;
+        top: 12px;
+        left: -6px;
+    }
+    
+    .form-wrapper button:hover:before{
+        border-right-color: #e54040;
+    }
+    
+    .form-wrapper button:focus:before{
+        border-right-color: #c42f2f;
+    }    
+    
+    .form-wrapper button::-moz-focus-inner {
+        border: 0;
+        padding: 0;
+    }
+    
+    label {
+    /* Other styling.. */
+    text-align: right;
+    clear: both;
+    float:left;
+    margin-right:15px;
+}
+    .input-sm{
+     width: 75px;
+     float:right;
+     color: black;
+     
+     }
+    div#loading {
+    width: 35px;
+    height: 35px;
+    display: none;
+    background: url(/static/img/ajax-loader.gif) no-repeat;
+    cursor: wait;
+    top: 0%;
+    left: 50%;
+    margin-left: 50%;
+    margin-top: 0%;
+    }
+    
+
+    </style>
+  
+
+</head>
+
+<body>
+<div class="topcorner" ><a href="/"><button type="button" class="btn btn-default">Home</button></a></div>
+<div class="container">
+        <form class="form-wrapper cf" action="/search" method="post">
+            <div class="row">
+                <input type="text" placeholder="Search..." name="searchterm" id="searchterm" value="{{searchterm}}">
+                <button type="submit" id="btn_submit" onclick="loading();">Search</button> 
+             </div>              
+             
+             <div class="row"> &nbsp;</div>
+             
+             <div class="form-group">            
+                 <div class="row">
+                    <div class="col-md-6">
+                        <label for="number">Currency:&nbsp;</label>
+                        <select class="form-control input-sm" id="currency" name="currency">
+                            <option>GBP</option>
+                            <option>EUR</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="number">Max Pages:</label>
+                        <input type="number" class="input-sm" name="maxPages" id="maxPages" min="1" {% if maxPages %}  value = {{maxPages}} {%else%} value = "1" {% endif %}>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="number">Price From:</label>
+                        <input type="number" class="form-control input-sm" name="priceFrom" id="priceFrom" min="0" {% if priceFrom %}  value = {{priceFrom}}  {% endif %}>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="number">Price To:&nbsp;&nbsp;</label>
+                        <input type="number" class="form-control input-sm" name="priceTo" id="priceTo" min="0" {% if priceTo %}  value = {{priceTo}}  {% endif %}>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">            
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="number">Rank From:</label>
+                        <input type="number" class="form-control input-sm" name="salesRankFrom" id="salesRankFrom" min="0" {% if salesRankFrom %}  value = {{salesRankFrom}} {% endif %}>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="number">Rank To:&nbsp;&nbsp;</label>
+                        <input type="number" class="form-control input-sm" name="salesRankTo" id="salesRankTo" min="0" {% if salesRankTo %}  value = {{salesRankTo}} {% endif %}>
+                    </div>
+                </div>  
+            </div>  
+        </form>    
+        <div id="loadingmsg" style="display:none";>Please wait...</div>  
+        {%if continue_ %}<div id="loadingmsg1">Please wait...</div>  {%endif%}
+        <p></p>
+</div>
+
+<style>
+tr:nth-child(odd)       { background-color:#eee; }
+tr:nth-child(even)  { background-color:#fff; }
+
+tr:hover            { background-color: #F0FFF0}
+
+table
+{ 
+    margin-left: auto;
+    margin-right: auto;
+    font-family:sans-serif;
+    font-size:5t;
+    color:black;
+}
+.table-striped > tbody > tr:nth-of-type(odd) {
+background-color: none;  
+}
+
+
+.table-striped{
+color: black;
+ width: 90%;
+}
+
+th {
+    background-color:#2F4F4F;
+     color: white;
+     text-align:center; 
+    vertical-align:middle;
+} 
+
+td tr {
+    background-color:#778899;
+     color: black;
+     text-align:center; 
+     vertical-align:middle;
+} 
+
+.table-curved {
+    border-collapse: separate;
+}
+.table-curved {
+    border: solid #ccc 1px;
+    border-radius: 6px;
+    border-left:0px;
+}
+.table-curved td, .table-curved th {
+    border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    
+}
+.table-curved th {
+    border-top: none;
+    
+}
+.table-curved th:first-child {
+    border-radius: 6px 0 0 0;
+}
+.table-curved th:last-child {
+    border-radius: 0 6px 0 0;
+}
+.table-curved th:only-child{
+    border-radius: 6px 6px 0 0;
+}
+.table-curved tr:last-child td:first-child {
+    border-radius: 0 0 0 6px;
+}
+.table-curved tr:last-child td:last-child {
+    border-radius: 0 0 6px 0;
+}
+
+td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+th.headerSortUp { 
+    background-image: url(/static/img/small_asc.png); 
+    background-color: #3399FF; 
+}
+
+th.headerSortDown { 
+    background-image: url(/static/img/small_desc.png); 
+    background-color: #3399FF; 
+}
+a {
+        color: blue;
+    }
+
+.input-smm{
+     width: 45px;
+     height: 30px;
+     float:right;
+     color: black;
+     font: bold 10px/30px 'lucida sans', 'trebuchet MS', 'Tahoma';
+     direction: ltr;
+     padding: 2px 2px 2px 2px;
+     }
+
+
+</style>
+
+<div class = "row" id = 'downloadCSV'>
+    <div class="col-md-6" align="right" style="margin-left: 70px;">
+        <form method="get" action="/downloadCSV">
+        <button type="submit" class="btn btn-success">Download</button>
+        </form>
+    </div>
+    <div class="col-md-2" align="left" style="margin-left: 40px;">
+    
+
+</div>
+
+<br/>
+
+<div class="container" id="responseTable">
+		<table class = "table table-bordered table-striped table-curved" id = "myTable">
+                    
+                    
+
+
+</div>
+
+<script>
+
+
+
+
+
+
+</script>
+
+<script type="text/javascript" src="../static/js/jquery.tablesorter.js"></script> 
+<script>
+$(document).ready(function() 
+    { 
+        $("#myTable").tablesorter(); 
+    } 
+); 
+</script>
+<script >
+
+{%if not message %} $(document).ready(function() { $("#loadingmsg").hide();  $("#myTable").hide(); }); 
+
+{% endif %}
+{%if message %} $("#loadingmsg").show();  {%endif%}
+
+$("#btn_submit").click(function(){
+        $("#loadingmsg").show();
+    }); 
+
+
+
+$('#downloadCSV').hide();
+var interval = setInterval(check, 10000);
+function check() {
+$.ajax({
+            type: 'GET',
+            url: '/checkData',
+            success: function (response) {
+                    //console.log(response);
+                    console.log(response['stop']);
+                    if (response['stop'] == true) {
+
+                    var myDiv = $('#myTable');
+                    $("#loading").hide();
+                    $("#loadingmsg").hide();
+                    $('#downloadCSV').show();
+					$("#myTable").show();
+					$("#myTable").tablesorter(); 
+                    clearInterval(interval);
+                    myDiv.html(response['table']); 
+					$("#myTable").tablesorter(); 					
+
+                    }
+                    
+                             
+            }
+    });
+}
+
+
+//clearInterval(interval);
+
+
+</script>
+
+</body>
+</html>
